@@ -1,8 +1,8 @@
 package JavaAlgorithms.datastructures;
 
 class Node {
-    private int data;
-    private Node next;
+    int data;
+    Node next;
 
     public Node(int data, Node next) {
         this.data = data;
@@ -12,35 +12,53 @@ class Node {
     public Node(int data) {
         this.data = data;
     }
-
-    public int getData() {
-        return this.data;
-    }
-    public Node getNext() {
-        return this.next;
-    }
-    public void setData(int data) {
-        this.data = data;
-    }
-    public void setNext(Node next) {
-        this.next = next;
-    }
 }
 
 public class MyLinkedList {
-    Node head;
-    Node tail;
+    private Node head;
+    private Node tail;
+    private int size = 0;
 
     public boolean add(int data) {
         Node newNode = new Node(data);
-        if (head == null) {
+        if (isEmpty()) {
             head = newNode;
-        }
-        if (tail != null) {
-            tail.setNext(newNode);
+        } else {
+            tail.next = newNode;
         }
         tail = newNode;
+        size++;
 
         return true;
+    }
+
+    public int get(int index) {
+        if (!isValidIndex(index)) throw new IndexOutOfBoundsException();
+
+        Node current = head;
+        for (int i=0; i<index; i++) {
+            current = current.next;
+        }
+        return current.data;
+    }
+
+    public int remove() {
+        if (isEmpty()) throw new IndexOutOfBoundsException();
+
+        int removed = head.data;
+        head = head.next;
+        return removed;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public int size() {
+        return this.size;
+    }
+
+    boolean isValidIndex(int index) {
+        return index >= 0 && index<size;
     }
 }
