@@ -5,6 +5,14 @@ steps:
   - '-c'
   - |
     echo 'testing'
+    echo $TRIGGER_NAME
+    echo $COMMIT_SHA
+    echo $REVISION_ID
+    echo $SHORT_SHA
+    echo $REPO_NAME
+    echo $BRANCH_NAME
+    echo $TAG_NAME
+    echo $TRIGGER_BUILD_CONFIG_PATH
     exit 1
   env:
   - 'NODE_ENV=development'
